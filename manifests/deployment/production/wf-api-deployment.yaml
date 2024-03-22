@@ -36,13 +36,6 @@ spec:
               requests: { cpu: "5m", memory: "64Mi" },
               limits: { cpu: "100m", memory: "256Mi" }
             }
-          volumeMounts:
-            - mountPath: /app/CleanArchitecture.sqlite
-              name: weatherforecast-api-claim
-      volumes:
-        - name: weatherforecast-api-claim
-          persistentVolumeClaim:
-            claimName: weatherforecast-api-claim
       hostname: weatherforecast-api
       restartPolicy: Always
       imagePullSecrets:
