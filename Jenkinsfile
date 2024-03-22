@@ -309,7 +309,7 @@ spec:
                                     configs: [
                                         fileContentReplaceItemConfig( search: '(---CONTAINER_IMAGE_NAME---)', replace: "${CONTAINER_IMAGE_NAME}:${BUILD_NUMBER}", matchCount: 1),
                                     ],
-                                    fileEncoding: 'UTF-8', filePath: "manifests/deployment/production/reminders-api-deployment.yaml")
+                                    fileEncoding: 'UTF-8', filePath: "manifests/deployment/production/wf-api-deployment.yaml")
                             ]
                         )
 
