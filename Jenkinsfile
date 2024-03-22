@@ -243,7 +243,7 @@ pipeline {
                     PrintHeader(['number': '7', 'title': 'Publish project'])
                     script {
                         dir (PROJECT_UI_FOLDER) {
-                            sh "dotnet publish -c ${PUBLISH_MODE} -r ${TARGET_PLATFORM} --self-contained false T-o /app/publish"
+                            sh "dotnet publish -c ${PUBLISH_MODE} -r ${TARGET_PLATFORM} --self-contained false"
                         }
                     }
                 }
