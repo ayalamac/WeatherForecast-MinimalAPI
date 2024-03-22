@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: weatherforecast-api-svc
+  name: weatherforecast-api-svc
+  namespace: weatherforecast-main
+spec:
+  ports:
+    - name: api-port
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: weatherforecast-api
+    tier: backend
+status:
+  loadBalancer: {}

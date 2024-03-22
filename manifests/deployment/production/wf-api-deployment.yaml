@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherforecast-api
+  namespace: weatherforecast-main
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 40%
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: weatherforecast-api
+      tier: backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: weatherforecast-api
+        tier: backend
+        track: stable
+    spec:
+      containers:
+        - env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+          image: ---CONTAINER_IMAGE_NAME---
+          name: weatherforecast-api
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+          resources: {
+              requests: { cpu: "5m", memory: "64Mi" },
+              limits: { cpu: "100m", memory: "256Mi" }
+            }
+          volumeMounts:
+            - mountPath: /app/CleanArchitecture.sqlite
+              name: weatherforecast-api-claim
+      volumes:
+        - name: weatherforecast-api-claim
+          persistentVolumeClaim:
+            claimName: weatherforecast-api-claim
+      hostname: weatherforecast-api
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: aks-pullfrom-dsoapps
