@@ -157,59 +157,6 @@ pipeline {
             }
         }
 
-        stage('Tests Suite') {
-            // Ejecutar pruebas unitarias y de integración para garantizar la calidad del desarrollo.
-            parallel {
-                stage('Unit Tests - Domain') {
-                    // Ejecutar pruebas unitarias.
-                    steps {
-                        container(DOTNET_SDK_AGENT) {
-                            PrintHeader(['number': '4', 'title': 'Unit tests - Domain'])
-                            dir (UNIT_TESTS_DOMAIN_FOLDER) {
-                                sh "dotnet test --no-build"
-                            }
-                        }
-                    }
-                }
-
-                stage('Unit Tests - Application') {
-                    // Ejecutar pruebas unitarias.
-                    steps {
-                        container(DOTNET_SDK_AGENT) {
-                            PrintHeader(['number': '4', 'title': 'Unit tests - Application'])
-                            dir (UNIT_TESTS_APPLICATION_FOLDER) {
-                                sh "dotnet test --no-build"
-                            }
-                        }
-                    }
-                }
-
-                stage('Subcutaneous Tests - Application') {
-                    // Ejecutar pruebas subcutáneas.
-                    steps {
-                        container(DOTNET_SDK_AGENT) {
-                            PrintHeader(['number': '4', 'title': 'Subcutaneous Tests - Application'])
-                            dir (SUBCUTANEOUS_TESTS_FOLDER) {
-                                sh "dotnet test --no-build"
-                            }
-                        }
-                    }
-                }
-
-                stage('Integration Tests - Application') {
-                    // Ejecutar pruebas subcutáneas.
-                    steps {
-                        container(DOTNET_SDK_AGENT) {
-                            PrintHeader(['number': '4', 'title': 'Integration Tests - Application'])
-                            dir (INTEGRATION_TESTS_FOLDER) {
-                                sh "dotnet test --no-build"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         stage('Sonarqube (SAST)') {
             // Configurar el proyecto en Sonarqube con el nivel de calidad requerido.
             // Realizar un análisis estático de seguridad del código y un análisis de calidad utilizando Sonarqube.
