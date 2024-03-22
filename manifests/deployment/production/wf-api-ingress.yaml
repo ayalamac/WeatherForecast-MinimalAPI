@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: pdnazure.serviciosit.co
+  - host: testazure.serviciosit.co
     http:
       paths:
       - backend:
@@ -23,5 +23,5 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - pdnazure.serviciosit.co
+    - testazure.serviciosit.co
     secretName: tls-certificate
