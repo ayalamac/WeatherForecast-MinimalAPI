@@ -36,7 +36,7 @@ pipeline {
 
           // File and Paths
         String SOLUTION_NAME     = 'WeatherForecast-MinimalAPI.sln'
-        String PROJECT_UI_FOLDER = 'src/WeatherForecast.MinimalApi'
+        String PROJECT_UI_FOLDER = 'WeatherForecast.MinimalApi'
         // String UNIT_TESTS_DOMAIN_FOLDER      = 'tests/WeatherForecast.UnitTests' // TODO : Add unit tests
 
           // Destination
