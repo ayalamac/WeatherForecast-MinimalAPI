@@ -18,7 +18,7 @@ pipeline {
           // Agents
         String DOTNET_SDK_AGENT = 'dotnet-sdk-8'
         String DOCKER_AGENT     = 'docker'
-        String AZCLI_AGENT      = 'azure-cli'
+        String AZCLI_AGENT      = 'azure-cli-ubuntu'
 
           // Deploying to Azure Storage
         String CLIENT_ID       = credentials('az-sp-client-id')
@@ -230,18 +230,8 @@ pipeline {
             // Desplegar el artefacto en el servidor.
             agent {
                 kubernetes {
-                    idleMinutes 2
-                    yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: 'ubuntu'
-    image: 'ubuntu:22.04'
-    tty: true
-    command: 
-    - cat
-            """
+                    idleMinutes 1
+                    yaml GetKubernetesPodYaml(['podName': AZCLI_AGENT])
                 }
             }
             when { expression { DEPLOY_ENVIRONMENT in ['test', 'main'] } }
@@ -265,13 +255,13 @@ spec:
                         ]) {
                             script {
 
-                                // * Install Azure CLI and Kubectl
-                                sh '''
-apt-get update && apt install curl -y
-curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-                                '''
+//                                 // * Install Azure CLI and Kubectl
+//                                 sh '''
+// apt-get update && apt install curl -y
+// curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+// curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+// install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+//                                 '''
                                 
                                 // * Login to Azure
                                 sh "az login --service-principal -u ${CLIENT_ID} -p ${CLIENT_SECRET} -t ${TENANT_ID}"
