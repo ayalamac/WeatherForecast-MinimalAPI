@@ -3,7 +3,7 @@ WORKDIR /src
 COPY ["WeatherForecast.MinimalApi/WeatherForecast.MinimalApi.csproj", "WeatherForecast.MinimalApi/"]
 RUN dotnet restore "WeatherForecast.MinimalApi/WeatherForecast.MinimalApi.csproj"
 COPY . ../
-WORKDIR /src/WeatherForecast.MinimalApi
+WORKDIR /WeatherForecast.MinimalApi
 RUN dotnet build "WeatherForecast.MinimalApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
