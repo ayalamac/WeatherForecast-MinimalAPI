@@ -30,7 +30,7 @@ pipeline {
         String CLUSTER_NAME = 'AKS-LINGERIE-NP'
 
           // Project
-        String APP_NAME              = 'Reminders-API'
+        String APP_NAME              = 'WeatherForecast-MinimalAPI'
         String PROJECT_NAME          = "${APP_NAME}"
         String SONAR_QUALITY_LEVEL   = 'Standard'
 
